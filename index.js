@@ -7,7 +7,7 @@ const ms = require('ms')
 const activities = [
   "오류문의 : ! MOON#9999",
   `${client.guilds.cache.size} 개의 서버`,
-  "Developer : ! MOON#9999"
+  "Developer : ! MOON#9999",
   `Run with ${client.guilds.cache.size} Server`,
 ];
 
