@@ -4,12 +4,21 @@ const token = 'ODQxOTU3ODI5OTQxNjU3NjAw.YJuUVQ.eUd3UGzWSpwSEG9m4xsG4xYa8hM';
 const moment = require('moment')
 const ms = require('ms')
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
-    client.user.setActivity("상테메시지", {
-      type: "WATCHING", //LISTENING 듣기 | WATCHING 시청중 | STREAMING 방송중 | GAME 하는
-    });
-  });
+const activities = [
+  "오류문의 : ! MOON#9999",
+  `${client.guilds.cache.size} 개의 서버`,
+  "Developer : ! MOON#9999"
+  `Run with ${client.guilds.cache.size} Server`,
+];
+
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}`)
+  setInterval(() => {
+    const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
+    const newActivity = activities[randomIndex];
+    client.user.setActivity(newActivity);
+  }, 10000);
+});
 
   client.on('message', message => {
 		if(message.content === '!업타임' || message.content === '!up') {
