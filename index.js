@@ -58,7 +58,7 @@ client.on('guildMemberRemove', (member) => {
 client.on('message', message => {
     if(message.content === '!인증') {
       if(message.guild !== null){
-        if(message.channel.id !== "841265867286773770") return;
+        if(message.channel.id !== "841992490902224906") return;
         }
       let load = new Discord.MessageEmbed()
       .setDescription('처리중입니다..')
