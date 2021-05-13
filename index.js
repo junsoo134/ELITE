@@ -9,8 +9,6 @@ const activities = [
   "Developer : ! MOON#9999",
   `${client.guilds.cache.size} 개의 서버`,
   `Run with ${client.guilds.cache.size} Server`,
-  `${client.guilds.cache.get('720254006831611914').members.cache.filter(member => !member.user.bot).size} 명의 사용자`,
-  `Run with ${client.guilds.cache.get('720254006831611914').members.cache.filter(member => !member.user.bot).size} People`
 ];
 
 client.on("ready", () => {
