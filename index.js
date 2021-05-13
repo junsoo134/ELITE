@@ -3,6 +3,8 @@ const client = new Discord.Client();
 const token = 'ODQxOTU3ODI5OTQxNjU3NjAw.YJuUVQ.eUd3UGzWSpwSEG9m4xsG4xYa8hM';
 const moment = require('moment')
 const ms = require('ms')
+const talkedRecently = new Set();
+
 
 const activities = [
   "개발자 : ! MOON#9999",
@@ -39,6 +41,14 @@ client.on("ready", () => {
 
 		client.on('message', message => {
 			if(message.content === '!핑' || message.content === '!ping' || message.content === '!p') {
+        if (talkedRecently.has(message.author.id)) {
+          message.channel.send("해당 명령어는 2초 후 사용 할 수 있습니다.");
+          message.delete()
+  } else {
+      talkedRecently.add(message.author.id);
+      setTimeout(() => {
+        talkedRecently.delete(message.author.id);
+      }, 2000);
 				const Wping = new Discord.MessageEmbed()
 				.setDescription('핑 측정중...');
 				const Dping = new Discord.MessageEmbed()
@@ -48,6 +58,7 @@ client.on("ready", () => {
 					msg.edit(Dping)
 			})
 		}
+  }
 	});
 
 
