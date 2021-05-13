@@ -24,6 +24,14 @@ client.on("ready", () => {
 
   client.on('message', message => {
 		if(message.content === '!업타임' || message.content === '!up') {
+      if (talkedRecently.has(message.author.id)) {
+        message.channel.send("해당 명령어는 2초 후 사용 할 수 있습니다.");
+        message.delete()
+} else {
+    talkedRecently.add(message.author.id);
+    setTimeout(() => {
+      talkedRecently.delete(message.author.id);
+    }, 2000);
 			if(message.author.bot) return;  
 			const embed = new Discord.MessageEmbed()
 			.setDescription("업타임 측정중입니다...");
@@ -36,6 +44,7 @@ client.on("ready", () => {
 				  message.edit(embed2)
 				}, 2000);
 			})
+    }
 		}
 		});
 
@@ -77,9 +86,25 @@ client.on('guildMemberRemove', (member) => {
 
 client.on('message', message => {
     if(message.content === '!인증') {
+      let err = new Discord.MessageEmbed()
+      .setAuthor(message.guild.name)
+      .setTitle("오류")
+      .setDescription('해당 채널은 "인증" 채널입니다. \n "!인증" 명령어만 사용 할 수 있으며 잡담은 금지합니다.')
+      .setFooter(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
+      .setColor('#FF0000')
+      let err2 = new Discord.MessageEmbed()
+      .setAuthor(message.guild.name)
+      .setTitle("오류")
+      .setDescription(`${message.author.username} 님은 이미 인증을 했습니다.`)
+      .setFooter(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
+      .setColor('#FF0000')
+      if (message.member.roles.cache.some(role => role.name === 'USER')) return message.author.send(err2)
+      message.delete()
       if(message.guild !== null){
         if(message.channel.id !== "841992490902224906") return;
-        }
+        if(!message.content.includes('!인증')) {
+          message.delete()
+          message.author.send(err)
       let load = new Discord.MessageEmbed()
       .setDescription('처리중입니다..')
       .setAuthor(message.guild.name, 'https://cdn.discordapp.com/emojis/835050095455502368.gif?v=1')
@@ -98,6 +123,8 @@ client.on('message', message => {
       //message.member.roles.remove("제거할역할ID")
       message.author.send(embed)
     }
+    }
+  }
   });
 
   
