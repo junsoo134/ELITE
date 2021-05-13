@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const token = 'ODQxOTU3ODI5OTQxNjU3NjAw.YJuUVQ.eUd3UGzWSpwSEG9m4xsG4xYa8hM';
+const token = '';
 const moment = require('moment')
 const ms = require('ms')
 
@@ -9,6 +9,8 @@ const activities = [
   `${client.guilds.cache.size} 개의 서버`,
   "Developer : ! MOON#9999",
   `Run with ${client.guilds.cache.size} Server`,
+  `${client.guilds.cache.get('720254006831611914').members.cache.filter(member => !member.user.bot).size} 명의 사용자`,
+  `Run with ${client.guilds.cache.get('720254006831611914').members.cache.filter(member => !member.user.bot).size} People`
 ];
 
 client.on("ready", () => {
